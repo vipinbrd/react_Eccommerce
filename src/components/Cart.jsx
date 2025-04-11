@@ -1,6 +1,9 @@
-import items from "../components/dummyData/Items.json";
+import { useContext } from "react";
+import { CartContext } from "../store/CartContext";
+
 
 export function Cart() {
+    const{data:items,dispatch}=useContext(CartContext)
   function inputChangeHandler() {
     // Placeholder
   }

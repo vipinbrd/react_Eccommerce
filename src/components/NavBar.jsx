@@ -1,7 +1,9 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { CartContext } from "../store/CartContext";
 
 export function NavBar() {
-  const cartItemCount = 3; // get from state/store later
+ const{data}=useContext(CartContext)
 
   return (
     <nav className="bg-black text-white py-4 px-8 flex items-center justify-between">
@@ -44,11 +46,11 @@ export function NavBar() {
           Cart
         </NavLink>
 
-        {cartItemCount > 0 && (
+       
           <span className="absolute -top-2 -right-3 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
-            {cartItemCount}
+            {data.length}
           </span>
-        )}
+        
       </div>
     </nav>
   );
