@@ -27,6 +27,14 @@ export function NavBar() {
           Store
         </NavLink>
         <NavLink
+          to="/movie"
+          className={({ isActive }) =>
+            isActive ? "text-yellow-400" : "hover:text-yellow-300"
+          }
+        >
+          Movies
+        </NavLink>
+        <NavLink
           to="/about"
           className={({ isActive }) =>
             isActive ? "text-yellow-400" : "hover:text-yellow-300"
