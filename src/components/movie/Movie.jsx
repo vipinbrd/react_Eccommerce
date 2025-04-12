@@ -1,17 +1,20 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { MovieList } from "./MovieList";
 
 export function Movie() {
   const [movieData, setMovieData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const[error, setError]=useState(null);
+  useEffect(()=>{
+    fetchMovieHandler()
+  },[])
 
 
   async function fetchMovieHandler() {
     setError(null)
     setIsLoading(true);
     try{ 
-    const data = await fetch("https://swapi.dev/api/film");
+    const data = await fetch("https://swapi.dev/api/films");
     if(!data.ok){
         throw new Error("something went wrong ........Retrying")
     }
