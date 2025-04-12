@@ -25,6 +25,7 @@ export function Store() {
     
      toasthandler()
    }
+   const totalPrice=data.reduce((acc,cur)=>{acc+cur.price},0)
    
   return (
     <div className="p-6">

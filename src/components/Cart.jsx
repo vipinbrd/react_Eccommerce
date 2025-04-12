@@ -7,7 +7,7 @@ export function Cart() {
   function inputChangeHandler() {
     // Placeholder
   }
-
+  const totalPrice=items.reduce((acc,cur)=>{return acc+cur.price},0)
   return (
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
@@ -55,7 +55,7 @@ export function Cart() {
       </ul>
 
       <div className="mt-6 flex justify-between items-center border-t pt-4">
-        <p className="text-xl font-bold">Total amount: ₹100</p>
+        <p className="text-xl font-bold">Total amount: ₹{totalPrice}</p>
         <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
           Proceed to checkout
         </button>
