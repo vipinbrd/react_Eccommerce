@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { MovieList } from "./MovieList";
 import { AddMovieForm } from "./AddMovieForm";
 
@@ -11,7 +11,8 @@ export function Movie() {
     fetchMovieHandler();
   }, []);
 
-  async function fetchMovieHandler() {
+  const fetchMovieHandler=useCallback(async()=> {
+    console.log("fetching data")
     setError(null);
     setIsLoading(true);
     try {
@@ -26,17 +27,17 @@ export function Movie() {
       console.log(error);
     }
     setIsLoading(false);
-  }
+  })
 
   return (
     <div className="flex flex-col items-center min-h-screen px-4 py-10 bg-gray-100">
       
-      {/* AddMovieForm is now at the top and centered */}
+
       <div className="w-full max-w-4xl mb-10">
         <AddMovieForm />
       </div>
 
-      {/* Main Content */}
+
       <div className="w-full max-w-4xl">
         <button
           onClick={fetchMovieHandler}
