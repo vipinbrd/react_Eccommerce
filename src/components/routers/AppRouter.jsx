@@ -6,6 +6,8 @@ import {About} from "../About"
 import { Error } from "../Error"
 import { Cart } from "../Cart"
 import { Movie } from "../movie/Movie"
+import { Product } from "../product/Product"
+import { ProductDetails } from "../product/ProductDetails"
 export function AppRouter(){
 
  const router=createBrowserRouter([{
@@ -37,7 +39,16 @@ export function AppRouter(){
         {
             path:"movie",
             element:<Movie/>
+        },
+        {
+            path:"product",
+            element:<Product/>
+        },
+        {
+            path:"product/:productId",
+            element:<ProductDetails/>
         }
+        
     ]
  }]
 

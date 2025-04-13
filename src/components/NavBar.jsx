@@ -35,6 +35,14 @@ export function NavBar() {
           Movies
         </NavLink>
         <NavLink
+          to="/product"
+          className={({ isActive }) =>
+            isActive ? "text-yellow-400" : "hover:text-yellow-300"
+          }
+        >
+          Products
+        </NavLink>
+        <NavLink
           to="/about"
           className={({ isActive }) =>
             isActive ? "text-yellow-400" : "hover:text-yellow-300"
