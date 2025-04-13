@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export function AddMovieForm(props) {
   const [data, setData] = useState({ title: "", description: "", date: "" });
+  const[toastMessage, setToastMessage]=useState("")
 
   function inputChangeHandler(type, e) {
     switch (type) {
@@ -18,11 +19,40 @@ export function AddMovieForm(props) {
 
   function AddMovieHandler(e) {
     e.preventDefault(); 
+    fetch("http://localhost:8888/movie/create",{
+      method:"POST",
+
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify(data)
+    }).then((re)=>re.json()).then((res)=>
+    {
+      console.log(res)
+      setToastMessage("Movie Added successfully")
+    }).catch((e)=>{
+      setToastMessage("Something went Wrong")
+    })
+     
+    
+
+    
+
+    
+
+    setTimeout(()=>{
+      setToastMessage(false)
+    },2000)
     console.log(data);
   }
 
   return (
     <div className="flex justify-center items-start py-10 px-4 min-h-screen bg-gray-100">
+               {toastMessage && (
+        <div className="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg transition-all">
+          {toastMessage}
+        </div>
+      )}
       <form
         onSubmit={AddMovieHandler}
         className="bg-white shadow-md rounded-xl p-8 w-full max-w-xl"

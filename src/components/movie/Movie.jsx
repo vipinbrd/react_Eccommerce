@@ -6,32 +6,50 @@ export function Movie() {
   const [movieData, setMovieData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const[toastMessage,setToastMessage]=useState("")
 
   useEffect(() => {
     fetchMovieHandler();
-  }, []);
+  }, [toastMessage]);
 
   const fetchMovieHandler=useCallback(async()=> {
     console.log("fetching data")
     setError(null);
     setIsLoading(true);
     try {
-      const data = await fetch("https://swapi.dev/api/films");
+      const data = await fetch("http://localhost:8888/movie/all");
       if (!data.ok) {
         throw new Error("Something went wrong... Retrying");
       }
       const response = await data.json();
-      setMovieData(response.results);
+      setMovieData(response);
     } catch (error) {
       setError(error.message);
       console.log(error);
     }
     setIsLoading(false);
   })
+function MovieDeleteHandler(id){
 
+  fetch(`http://localhost:8888/movie/remove/${id}`,{
+    method:"DELETE"
+  }).then().then((res)=>{
+    setToastMessage("Movie Delete Successfull")
+    setTimeout(()=>{
+      setToastMessage(false)
+    },2000)
+    console.log(res)
+  })
+
+
+}
   return (
     <div className="flex flex-col items-center min-h-screen px-4 py-10 bg-gray-100">
-      
+             {toastMessage && (
+        <div className="fixed top-4 right-4 bg-red-500 text-white px-4 py-2 rounded shadow-lg transition-all">
+          {toastMessage}
+        </div>
+      )}
 
       <div className="w-full max-w-4xl mb-10">
         <AddMovieForm />
@@ -55,8 +73,8 @@ export function Movie() {
         {!isLoading && movieData.length > 0 && (
           <ul className="mt-8 space-y-4">
             {movieData.map((ele) => (
-              <li key={ele.episode_id}>
-                <MovieList data={ele} />
+              <li key={ele.id}>
+                <MovieList data={ele} onDeleteHanlder={MovieDeleteHandler} />
               </li>
             ))}
           </ul>
