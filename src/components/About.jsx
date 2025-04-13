@@ -1,3 +1,5 @@
+import { AboutUsForm } from "./AboutUsForm";
+
 export function About() {
     return (
       <div className="p-10 bg-gray-50">
@@ -24,6 +26,7 @@ export function About() {
             </p>
           </div>
         </div>
+        <AboutUsForm/>
       </div>
     );
   }
