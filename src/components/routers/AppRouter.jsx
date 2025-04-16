@@ -8,9 +8,12 @@ import { Cart } from "../Cart"
 import { Movie } from "../movie/Movie"
 import { Product } from "../product/Product"
 import { ProductDetails } from "../product/ProductDetails"
-import { Login } from "../Login"
-import { useContext } from "react"
+
+import { Suspense, useContext } from "react"
 import { AuthStore } from "../../store/AuthContext"
+import { lazy } from "react"
+
+const Login=lazy(()=>import("../Login"))
 export function AppRouter(){
 const {token}=useContext(AuthStore)
 const isLoggedIn=Object.keys(token).length>0
@@ -59,7 +62,7 @@ const isLoggedIn=Object.keys(token).length>0
         },
         {
             path:"login",
-            element:<Login/>
+            element: (<Suspense fallback={<p>loading</p>}><Login/></Suspense>)
         }
         
     ]
