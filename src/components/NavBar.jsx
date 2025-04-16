@@ -50,6 +50,14 @@ export function NavBar() {
         >
           About
         </NavLink>
+        <NavLink
+          to="/login"
+          className={({ isActive }) =>
+            isActive ? "text-yellow-400" : "hover:text-yellow-300"
+          }
+        >
+          Login
+        </NavLink>
       </div>
 
       <div className="flex-1 text-right relative">

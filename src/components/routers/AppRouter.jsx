@@ -8,6 +8,7 @@ import { Cart } from "../Cart"
 import { Movie } from "../movie/Movie"
 import { Product } from "../product/Product"
 import { ProductDetails } from "../product/ProductDetails"
+import { Login } from "../Login"
 export function AppRouter(){
 
  const router=createBrowserRouter([{
@@ -22,7 +23,11 @@ export function AppRouter(){
         },
         {
             path:"store",
-            element:<Store/>
+            element:<Store/>,
+            children:[{
+                path:"newstore",
+                element:<h1>i am new Store</h1>
+            }]
         },
         {
             path:"home",
@@ -47,6 +52,10 @@ export function AppRouter(){
         {
             path:"product/:productId",
             element:<ProductDetails/>
+        },
+        {
+            path:"login",
+            element:<Login/>
         }
         
     ]

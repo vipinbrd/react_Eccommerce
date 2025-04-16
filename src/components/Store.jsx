@@ -1,6 +1,7 @@
 import { useContext,useState } from "react";
 import items from "../components/dummyData/Items.json";
 import { CartContext } from "../store/CartContext";
+import { Outlet } from "react-router-dom";
 
 
 
@@ -25,7 +26,7 @@ export function Store() {
     
      toasthandler()
    }
-   const totalPrice=data.reduce((acc,cur)=>{acc+cur.price},0)
+   
    
   return (
     <div className="p-6">
@@ -59,6 +60,10 @@ export function Store() {
           </li>
         ))}
       </ul>
+      <div>
+      {/* only for testing purpose */}
+        <Outlet/>
+      </div>
     </div>
   );
 }
