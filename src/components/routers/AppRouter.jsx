@@ -9,9 +9,13 @@ import { Movie } from "../movie/Movie"
 import { Product } from "../product/Product"
 import { ProductDetails } from "../product/ProductDetails"
 import { Login } from "../Login"
+import { useContext } from "react"
+import { AuthStore } from "../../store/AuthContext"
 export function AppRouter(){
-
+const {token}=useContext(AuthStore)
+const isLoggedIn=Object.keys(token).length>0
  const router=createBrowserRouter([{
+   
 
     path:"/",
     element:<AppLayout/>,
@@ -47,7 +51,7 @@ export function AppRouter(){
         },
         {
             path:"product",
-            element:<Product/>
+            element: isLoggedIn?<Product/>:<Login/>
         },
         {
             path:"product/:productId",
