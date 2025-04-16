@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import review from "../../components/dummyData/dummyReview.json";
+import { AuthStore } from "../../store/AuthContext";
 
 export function ProductDetails() {
+  const {token}=useContext(AuthStore)
   const { productId } = useParams();
   const [productData, setProductData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -22,6 +24,28 @@ export function ProductDetails() {
   if (isLoading) {
     return <p className="text-center text-gray-600 py-10">Loading...</p>;
   }
+console.log(token)
+
+async function addToCartHandler(id){
+  const cartInfo=  {
+    userId: token.userId,
+    productId: id,
+    quantity: 1
+  }
+  const response=await fetch("http://localhost:8888/cart",{
+    method:"POST",
+    body:JSON.stringify(cartInfo),
+    headers:{
+      "Content-Type":"application/json"
+    }
+
+  })
+  const jsonResponse=await response.json();
+  console.log(jsonResponse)
+
+  console.log(id)
+}
+
 
   return (
     <div className="px-6 py-10 bg-gray-100 min-h-screen">
@@ -65,8 +89,8 @@ export function ProductDetails() {
               ₹{productData.sellingPrice}
             </span>
           </div>
-          <button className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300">
-            Buy Now
+          <button onClick={()=>{addToCartHandler(productData.id)}} className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300">
+            Add To Cart
           </button>
         </div>
       </div>
